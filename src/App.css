@@ -61,7 +61,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgb(216, 216, 216);
