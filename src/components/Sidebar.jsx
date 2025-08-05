@@ -7,18 +7,18 @@ import { links } from '../data/dummy'
 import { useStateContext } from '../contexts/ContextProvider'
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu, screenSize } = useStateContext()
+  const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext()
   
   const handleCloseSideBar = () => {
     if(activeMenu && screenSize <= 900) {
       setActiveMenu(false)
     }
   }
-  const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md m-2 text-blue-850'
+  const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md m-2 text-black'
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-gray-700 text-md dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2'
   
   return (
-    <div className='ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
+    <div className='ml-3 h-screen overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent pb-10'>
       { activeMenu && (
       <>
         <div className='flex justify-between items-center'>
@@ -43,6 +43,9 @@ const Sidebar = () => {
                 <NavLink to={`/${link.name}`}
                 key={link.name}
                 onClick={handleCloseSideBar}
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? currentColor: ''
+                })}
                 className={({ isActive }) => isActive ? activeLink : normalLink }
                 >
                   {link.icon}
